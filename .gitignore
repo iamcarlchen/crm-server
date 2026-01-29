@@ -1,0 +1,7 @@
+target/
+.idea/
+*.iml
+
+# local secrets
+src/main/resources/application-local.yml
+.env

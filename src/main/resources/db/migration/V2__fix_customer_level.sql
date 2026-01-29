@@ -1,0 +1,1 @@
+ALTER TABLE customers MODIFY level VARCHAR(1) NOT NULL;
