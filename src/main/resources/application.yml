@@ -20,8 +20,16 @@ spring:
   flyway:
     enabled: true
 
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
 app:
   cors:
     allowed-origins:
       - http://127.0.0.1:5173
       - http://localhost:5173
+  auth:
+    # For local/dev you can set JWT_SECRET to anything; we hash it to a 256-bit key.
+    jwtSecret: ${JWT_SECRET:change-me-in-env}
+    jwtExpireHours: ${JWT_EXPIRE_HOURS:168}

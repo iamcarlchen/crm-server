@@ -29,7 +29,26 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 
 API base: `http://localhost:8080/api`
 
+## Auth
+This backend uses **JWT Bearer** auth.
+
+- Login: `POST /api/auth/login` → returns `{ token }`
+- Me: `GET /api/auth/me`
+- Pass `Authorization: Bearer <token>` to all `/api/**` endpoints.
+
+Seeded admin user:
+- username: `admin`
+- password: `admin123`
+
+Set a strong secret in env:
+```bash
+export JWT_SECRET="<your-long-secret>"
+```
+
 ## Endpoints
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+
 - `GET/POST /api/customers`
 - `GET/PUT/DELETE /api/customers/{id}`
 - `GET/POST /api/orders`
@@ -39,4 +58,7 @@ API base: `http://localhost:8080/api`
 - `GET/POST /api/finance-records`
 - `GET/PUT/DELETE /api/finance-records/{id}`
 
-CORS is enabled for `http://127.0.0.1:5173` by default.
+- `GET/POST /api/employees` (ADMIN only)
+- `GET/PUT/DELETE /api/employees/{id}` (ADMIN only)
+
+CORS is enabled for local dev.
