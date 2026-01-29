@@ -1,7 +1,5 @@
 package com.iamcarlchen.crm.config;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -10,9 +8,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig {
 
-  @Value("${app.cors.allowed-origins:}")
-  private List<String> allowedOrigins;
-
+  /**
+   * Dev-friendly CORS.
+   *
+   * Note: In production, lock this down to your real frontend domains.
+   */
   @Bean
   WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {
@@ -20,7 +20,7 @@ public class CorsConfig {
       public void addCorsMappings(CorsRegistry registry) {
         registry
             .addMapping("/api/**")
-            .allowedOrigins(allowedOrigins.toArray(new String[0]))
+            .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*", "http://0.0.0.0:*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*");
       }
